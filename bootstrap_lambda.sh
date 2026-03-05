@@ -10,10 +10,10 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 done
 
 
-echo "installing 3.11"
-sudo apt install -y python3.11 python3.11-venv python3.11-dev
+echo "installing 3.12"
+sudo apt install -y python3.12 python3.12-venv python3.12-dev
 
-python3.11 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -e .
 
