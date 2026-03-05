@@ -3,4 +3,3 @@ scikit-learn
 kaggle                                                          
 pyyaml                                                          
 harbor @ git+https://github.com/steadyworksai/harbor.git@docker-gpu-support
-gpu-support 
