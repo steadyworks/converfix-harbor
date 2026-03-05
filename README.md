@@ -4,7 +4,7 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
 
 **12 tasks** across **5 problems**.
 
-## Prerequisites
+## Prerequisites (~5 mins)
 
 1. Ensure:
    - Kaggle API credentials stored under: `~/.kaggle/kaggle.json`
@@ -14,31 +14,37 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
    - Git LFS installed
    - Python 3.12
 
-## Quick Start
+## Quick Start (~10 mins)
 
 ```bash
 # 1. Clone and fetch LFS data
 cd converfix-harbor
 
+# 2. Build/pull base Docker image
+sudo usermod -aG docker "$USER"                                 
+newgrp docker
+./build_or_pull_docker_image.sh # (~ 8 mins)
+
+# 3. Install Python packages
 python3.12 -m venv .venv # or python3 -m venv .venv  (Needs >= Python 3.12)
 source .venv/bin/activate
 pip install -r requirements.txt
 git lfs install && git lfs pull
 
-# 2. Prepare data
+# 4. Prepare data
+# Before you run, make sure you have filled out `~/.kaggle/kaggle.json` (as specified in Prerequisite)
+# And go to https://www.kaggle.com/competitions/tweet-sentiment-extraction to accept the Terms
 python prepare_data.py --all
 
-# 3. Build/pull base Docker image
-./build_or_pull_docker_image.sh
 
-# 4. Run with Harbor
-# 4.a. Run oracle
+# 5. Run with Harbor
+# 5.a. Run oracle
 harbor run -c configs/job-oracle.yaml
 # Expected to see near perfect score:
 #⠸ 11/11 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ 0:35:44 -:--:--
 
 
-# 4.b. Run Claude Code agent
+# 5.b. Run Claude Code agent
 # Option 1
 export ANTHROPIC_API_KEY="..."    
 
