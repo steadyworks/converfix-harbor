@@ -17,7 +17,7 @@ done
 
 # ── System packages ──────────────────────────────────────────────────────────
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg2 python3.11 python3.11-venv python3.11-dev git-lfs
+sudo apt-get install -y ca-certificates curl gnupg2 python3.12 python3.12-venv python3.12-dev git-lfs
 
 git lfs install
 
@@ -60,7 +60,7 @@ sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 
 # ── Python venv + Harbor + data prep deps ────────────────────────────────────
-python3.11 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install pandas scikit-learn kaggle pyyaml
