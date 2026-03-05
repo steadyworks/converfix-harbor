@@ -20,29 +20,25 @@ NOTE: Run `./bootstrap_prerequisite.sh`
 # 1. Clone and fetch LFS data
 cd converfix-harbor
 
-python3.12 -m venv .venv
+python3.12 -m venv .venv # or python3 -m venv .venv  (Needs >= Python 3.12)
 source .venv/bin/activate
-pip install pandas scikit-learn kaggle pyyaml
-pip install --no-cache-dir --force-reinstall "git+https://github.com/steadyworksai/harbor.git@docker-gpu-support"
+pip install -r requirements.txt
 git lfs install && git lfs pull
 
 # 2. Prepare data
-python prepare.py --all
+python prepare_data.py --all
 
 # 3. Build/pull base Docker image
-./build.sh
+./build_or_pull_docker_image.sh
 
 # 4. Run with Harbor
-
-
-
-# 5.a. Run oracle
+# 4.a. Run oracle
 harbor run -c configs/job-oracle.yaml
 # Expected to see near perfect score:
 #⠸ 11/11 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ 0:35:44 -:--:--
 
 
-# 5.b. Run Claude Code agent
+# 4.b. Run Claude Code agent
 # Option 1
 export ANTHROPIC_API_KEY="..."    
 
