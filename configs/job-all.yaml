@@ -1,0 +1,13 @@
+jobs_dir: jobs
+n_attempts: 1
+orchestrator:
+  type: local
+  n_concurrent_trials: 4
+environment:
+  type: docker
+  delete: false
+agents:
+  - name: claude-code
+    model_name: anthropic/claude-sonnet-4-6
+datasets:
+  - path: tasks
