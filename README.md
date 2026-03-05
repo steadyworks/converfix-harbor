@@ -2,33 +2,50 @@
 
 A Harbor-compatible benchmark for debugging buggy ML implementations.
 
-**22 tasks** across **6 problems**.
+**12 tasks** across **5 problems**.
 
 ## Prerequisites
 
-- [Harbor](https://github.com/harbor-framework/harbor) installed
-- Docker
-- Git LFS (`git lfs install`)
-- Python 3.11+ with: `pip install pandas scikit-learn kaggle pyyaml`
-- Kaggle API credentials (if using Kaggle problems): `~/.kaggle/kaggle.json`
+NOTE: Run `./bootstrap_prerequisite.sh`
+
+- NVIDIA Container Toolkit
+- Docker 
+- Git LFS installed
+- Python 3.12
+- Kaggle API credentials stored under: `~/.kaggle/kaggle.json`
 
 ## Quick Start
 
 ```bash
 # 1. Clone and fetch LFS data
-git clone <repo-url> converfix-harbor
 cd converfix-harbor
+
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install pandas scikit-learn kaggle pyyaml
+pip install --no-cache-dir --force-reinstall "git+https://github.com/steadyworksai/harbor.git@docker-gpu-support"
 git lfs install && git lfs pull
 
 # 2. Prepare data
-pip install pandas scikit-learn kaggle pyyaml
 python prepare.py --all
 
 # 3. Build/pull base Docker image
 ./build.sh
 
 # 4. Run with Harbor
-harbor run -p tasks/ -a claude-code -m anthropic/claude-opus-4-6
+
+
+
+# 5.a. Run oracle
+harbor run -c configs/job-oracle.yaml
+
+# 5.b. Run Claude Code agent
+# Option 1
+export ANTHROPIC_API_KEY="..."    
+
+# Option 2
+export CLAUDE_CODE_OAUTH_TOKEN="..."
+harbor run -c configs/job-claude-code.yaml
 ```
 
 ## Directory Structure
@@ -39,7 +56,7 @@ harbor run -p tasks/ -a claude-code -m anthropic/claude-opus-4-6
 ├── problems/           # Problem definitions (data + grading)
 ├── environment/        # Base Docker image
 ├── data/               # Prepared data (created by prepare.py, gitignored)
-└── tasks/              # Harbor task set (22 tasks)
+└── tasks/              # Harbor task set (12 tasks)
 ```
 
 ## Problems
@@ -48,8 +65,7 @@ harbor run -p tasks/ -a claude-code -m anthropic/claude-opus-4-6
 |---------|------|-------|-----|
 | Creditcard Fraud Detection 2023 | community | 1 | Yes |
 | Simple Classification Problem | community | 2 | No |
-| Social Network User Engagement Prediction | community | 2 | No |
-| Tomato diseases | community | 9 | Yes |
+| Tomato diseases | community | 1 | Yes |
 | Tweet Sentiment Extraction | kaggle | 2 | No |
 | Unsolicited Messages | community | 6 | No |
 
@@ -65,18 +81,6 @@ Run `python prepare.py --all` to prepare all datasets, or `python prepare.py <pr
 
 Run `./build.sh` to get the base image. It first tries to pull `steadyworks/converfix-base:latest` from DockerHub; if that fails, it builds locally (~30 min).
 
-## Running Tasks
-
-```bash
-# Run all tasks
-harbor run -p tasks/ -a claude-code -m anthropic/claude-opus-4-6
-
-# Run a specific task
-harbor run -t tasks/converfix-scp-hardcoded-v0 -a claude-code -m anthropic/claude-opus-4-6
-
-# Run with oracle (reference solution)
-harbor run -p tasks/ -a oracle
-```
 
 ## Reward Format
 
@@ -89,3 +93,18 @@ Each task produces a `reward.json` with:
 | `valid_submission` | int 0/1 | Whether a valid submission was produced |
 | `beats_buggy` | int 0/1/-1 | Whether score exceeds buggy baseline |
 | `matches_golden` | int 0/1 | Whether score matches golden reference |
+
+
+## How to Obtain kaggle.json
+
+You can generate and download this file directly from the Kaggle website: 
+- Sign in to your Kaggle account.
+- Navigate to your Account settings page (profile picture -> "My Account").
+- Scroll down to the API section.
+- Click the "Create New API Token" button. This action will automatically generate and download the kaggle.json file to your computer.
+
+Store `~/.kaggle/kaggle.json`: 
+
+```
+{"username":"<yourkaggleusername>","key":"<kagglekey>"}
+```

@@ -110,7 +110,6 @@ def download_kaggle_dataset(competition_id: str, download_dir: Path) -> Path:
 
     try:
         from kaggle.api.kaggle_api_extended import KaggleApi
-        from kaggle.rest import ApiException
     except ImportError:
         raise RuntimeError(
             "Kaggle API not installed. Run: pip install kaggle\n"
@@ -124,7 +123,7 @@ def download_kaggle_dataset(competition_id: str, download_dir: Path) -> Path:
         api.competition_download_files(
             competition=competition_id, path=download_dir, quiet=False, force=False,
         )
-    except ApiException as e:
+    except Exception as e:
         if "You must accept this competition" in str(e):
             print("  You must accept the competition rules before downloading.")
             _prompt_user_to_accept_rules(competition_id)

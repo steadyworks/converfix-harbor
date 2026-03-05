@@ -1,5 +1,0 @@
-services:
-  main:
-    volumes:
-      - ../../../data/tomato-diseases/prepared/public:/home/data:ro
-      - ../../../data/tomato-diseases/prepared/private:/private/data:ro

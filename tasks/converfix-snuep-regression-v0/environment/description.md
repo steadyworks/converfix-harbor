@@ -1,1 +1,0 @@
-I was trying to explore several architectures, and found the correct architecture. But somehow the final submission result wasn't great. FFFFFFF help

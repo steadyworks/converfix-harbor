@@ -2,29 +2,13 @@
 set -euo pipefail
 
 # Bootstrap a fresh Ubuntu Lambda/cloud instance for converfix-harbor.
-# Installs: Python 3.12, Docker, NVIDIA Container Toolkit, Harbor, and prepares data.
-
-# ── Clean up conflicting NVIDIA apt sources (e.g. leftover from previous run) ─
-if [ -f /etc/apt/sources.list.d/nvidia-container-toolkit.list ]; then
-    sudo rm -f /etc/apt/sources.list.d/nvidia-container-toolkit.list
-    sudo rm -f /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
-fi
-
-# ── Remove conflicting Docker packages ───────────────────────────────────────
-for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
-    sudo apt-get remove -y "$pkg" 2>/dev/null || true
-done
+# Installs: Python 3.12, Docker, NVIDIA Container Toolkit, Harbor
 
 # ── System packages ──────────────────────────────────────────────────────────
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg2 python3.12 python3.12-venv python3.12-dev git-lfs
 
 git lfs install
-
-# ── Git config ───────────────────────────────────────────────────────────────
-git config --global user.email "tedwxli@gmail.com"
-git config --global user.name "Ted Li"
-git config --global pull.rebase true
 
 # ── Docker Engine ────────────────────────────────────────────────────────────
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -59,18 +43,11 @@ sudo apt-get install -y nvidia-container-toolkit
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 
-# ── Python venv + Harbor + data prep deps ────────────────────────────────────
-python3.12 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install pandas scikit-learn kaggle pyyaml
-pip install harbor
 
 # ── Prepare data & build base image ──────────────────────────────────────────
 newgrp docker <<'NEWGRP'
 docker --version
 nvidia-smi
-docker run --rm --gpus all nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi
 
 echo ""
 echo "=== Bootstrap complete ==="
