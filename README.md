@@ -38,6 +38,9 @@ python prepare.py --all
 
 # 5.a. Run oracle
 harbor run -c configs/job-oracle.yaml
+# Expected to see near perfect score:
+#⠸ 11/11 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ 0:35:44 -:--:--
+
 
 # 5.b. Run Claude Code agent
 # Option 1
@@ -45,7 +48,10 @@ export ANTHROPIC_API_KEY="..."
 
 # Option 2
 export CLAUDE_CODE_OAUTH_TOKEN="..."
+
 harbor run -c configs/job-claude-code.yaml
+# Expected to see non-perfect score:
+#⠸ 11/11 Mean: 0.867 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ 0:35:44 -:--:--
 ```
 
 ## Directory Structure
