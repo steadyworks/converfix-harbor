@@ -61,8 +61,9 @@ harbor run -c configs/job-claude-code.yaml
 ## Directory Structure
 
 ```
-├── prepare.py          # Data preparation script
-├── build.sh            # Docker image pull/build
+├── prepare_data.py                     # Data preparation script
+├── build_or_pull_docker_image.sh       # Docker image pull/build
+├── bootstrap_prerequisite.sh           # Bootstrap prerequisite
 ├── problems/           # Problem definitions (data + grading)
 ├── environment/        # Base Docker image
 ├── data/               # Prepared data (created by prepare.py, gitignored)
