@@ -14,7 +14,7 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
    - Git LFS installed
    - Python 3.12
 
-## Quick Start (~10 mins)
+## Quick Start (~10 mins to set everything up)
 
 ```bash
 # 1. Clone and fetch LFS data
@@ -35,11 +35,11 @@ git lfs install && git lfs pull
 # Before you run, make sure you have filled out `~/.kaggle/kaggle.json` (as specified in Prerequisite)
 # And go to https://www.kaggle.com/competitions/tweet-sentiment-extraction to accept the Terms
 python prepare_data.py --all
+```
 
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------
+## Run Harbor (Oracle / Claude Code agent)
 
+```bash
 # 5. Run with Harbor
 # 5.a. Run oracle
 harbor run -c configs/job-oracle.yaml
