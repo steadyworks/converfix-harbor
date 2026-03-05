@@ -4,6 +4,12 @@ set -euo pipefail
 # Bootstrap a fresh Ubuntu Lambda/cloud instance for converfix-harbor.
 # Installs: Python 3.11, Docker, NVIDIA Container Toolkit, Harbor, and prepares data.
 
+# ── Clean up conflicting NVIDIA apt sources (e.g. leftover from previous run) ─
+if [ -f /etc/apt/sources.list.d/nvidia-container-toolkit.list ]; then
+    sudo rm -f /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    sudo rm -f /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+fi
+
 # ── Remove conflicting Docker packages ───────────────────────────────────────
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
     sudo apt-get remove -y "$pkg" 2>/dev/null || true
@@ -38,8 +44,9 @@ sudo systemctl start docker
 sudo usermod -aG docker "$USER"
 
 # ── NVIDIA Container Toolkit ─────────────────────────────────────────────────
-# Skip repo setup if already configured (e.g. Lambda cloud-init)
-if ! apt-cache policy nvidia-container-toolkit 2>/dev/null | grep -q "Candidate:"; then
+# Only add the repo if no existing NVIDIA container source is configured
+# (Lambda cloud-init provides one via /etc/apt/cloud-init.gpg.d/)
+if ! grep -rq "nvidia.github.io/libnvidia-container" /etc/apt/sources.list.d/ 2>/dev/null; then
     curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey \
         | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
     curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list \
