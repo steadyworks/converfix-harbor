@@ -51,8 +51,4 @@ nvidia-smi
 
 echo ""
 echo "=== Bootstrap complete ==="
-echo "Run: source .venv/bin/activate"
-echo "Then: python prepare.py --all"
-echo "Then: ./build.sh"
-echo "Then: harbor run -c configs/job-all.yaml -a oracle"
 NEWGRP

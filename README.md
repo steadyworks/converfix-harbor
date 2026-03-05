@@ -8,7 +8,7 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
 
 1. Ensure:
    - Kaggle API credentials stored under: `~/.kaggle/kaggle.json`
-2. Ensure following are installed: Run `./bootstrap_prerequisite.sh` if not sure
+2. Ensure following are installed: Run `./bootstrap_prerequisite.sh` if not sure (Tested working on Ubuntu 22.04)
    - NVIDIA Container Toolkit
    - Docker 
    - Git LFS installed
