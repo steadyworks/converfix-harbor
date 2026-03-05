@@ -22,7 +22,7 @@ git lfs install && git lfs pull
 
 # 2. Prepare data
 pip install pandas scikit-learn kaggle pyyaml
-./prepare.sh --all
+python prepare.py --all
 
 # 3. Build/pull base Docker image
 ./build.sh
@@ -34,11 +34,11 @@ harbor run -p tasks/ -a claude-code -m anthropic/claude-opus-4-6
 ## Directory Structure
 
 ```
-├── prepare.sh          # Data preparation script
+├── prepare.py          # Data preparation script
 ├── build.sh            # Docker image pull/build
 ├── problems/           # Problem definitions (data + grading)
 ├── environment/        # Base Docker image
-├── data/               # Prepared data (created by prepare.sh, gitignored)
+├── data/               # Prepared data (created by prepare.py, gitignored)
 └── tasks/              # Harbor task set (22 tasks)
 ```
 
@@ -56,7 +56,7 @@ harbor run -p tasks/ -a claude-code -m anthropic/claude-opus-4-6
 
 ## Data Preparation
 
-Run `./prepare.sh --all` to prepare all datasets, or `./prepare.sh <problem_id>` for a specific problem.
+Run `python prepare.py --all` to prepare all datasets, or `python prepare.py <problem_id>` for a specific problem.
 
 - **Community problems**: Data is included via Git LFS (`dataset.zip` files)
 - **Kaggle problems**: Requires Kaggle API credentials; downloads automatically

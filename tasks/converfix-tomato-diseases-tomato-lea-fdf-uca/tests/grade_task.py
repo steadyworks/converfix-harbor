@@ -14,6 +14,7 @@ METRIC_LOWER_IS_BETTER = False
 SUBMISSION_PATH = Path("/home/submission/submission.csv")
 ANSWERS_PATH = Path("/private/data/test.csv")
 REWARD_JSON_PATH = Path("/logs/verifier/reward.json")
+DETAILS_JSON_PATH = Path("/logs/verifier/grading_details.json")
 
 
 def compute_normalized_reward(score, metric_buggy, metric_golden, lower_is_better):
@@ -35,7 +36,8 @@ def compute_normalized_reward(score, metric_buggy, metric_golden, lower_is_bette
 
 def main():
     if not SUBMISSION_PATH.exists():
-        rewards = {"reward": 0.0, "valid_submission": 0, "metric": -1}
+        reward = 0.0
+        details = {"reward": 0.0, "valid_submission": 0, "metric": -1}
     else:
         try:
             submission = pd.read_csv(SUBMISSION_PATH, float_precision="round_trip")
@@ -52,8 +54,9 @@ def main():
 
             norm_reward = compute_normalized_reward(score, METRIC_BUGGY, METRIC_GOLDEN, METRIC_LOWER_IS_BETTER)
 
-            rewards = {
-                "reward": norm_reward if norm_reward is not None else (1.0 if matches_golden else 0.0),
+            reward = norm_reward if norm_reward is not None else (1.0 if matches_golden else 0.0)
+            details = {
+                "reward": reward,
                 "metric": score,
                 "valid_submission": 1,
                 "beats_buggy": int(beats_buggy) if beats_buggy is not None else -1,
@@ -61,13 +64,21 @@ def main():
                 "normalized_performance_reward": norm_reward if norm_reward is not None else -1,
             }
         except InvalidSubmissionError as e:
-            rewards = {"reward": 0.0, "valid_submission": 0, "metric": -1, "error": str(e)}
+            reward = 0.0
+            details = {"reward": 0.0, "valid_submission": 0, "metric": -1, "error": str(e)}
         except Exception as e:
-            rewards = {"reward": 0.0, "valid_submission": 0, "metric": -1, "error": str(e)}
+            reward = 0.0
+            details = {"reward": 0.0, "valid_submission": 0, "metric": -1, "error": str(e)}
 
     REWARD_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REWARD_JSON_PATH.write_text(json.dumps(rewards, indent=2))
-    print(json.dumps(rewards, indent=2))
+
+    # Harbor expects exactly one key in reward.json
+    REWARD_JSON_PATH.write_text(json.dumps({"reward": reward}, indent=2))
+
+    # Full grading details for debugging / tracing
+    DETAILS_JSON_PATH.write_text(json.dumps(details, indent=2))
+
+    print(json.dumps(details, indent=2))
 
 
 if __name__ == "__main__":
