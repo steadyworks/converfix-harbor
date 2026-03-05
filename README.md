@@ -4,6 +4,8 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
 
 **12 tasks** across **5 problems**.
 
+![overview](./assets/converfix-overview.png)
+
 ## Prerequisites (~5 mins)
 
 1. Ensure:
