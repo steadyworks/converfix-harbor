@@ -1,0 +1,11 @@
+id: creditcard-fraud-detection-2023
+name: Creditcard Fraud Detection 2023
+problem_type: community
+description: converfix/problems/creditcard-fraud-detection-2023/description.md
+
+grader:
+  name: accuracy
+  metric_lower_is_better: false
+  grade_fn: converfix.problems.creditcard-fraud-detection-2023.grade:grade
+
+preparer: converfix.problems.creditcard-fraud-detection-2023.prepare:prepare

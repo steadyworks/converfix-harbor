@@ -1,0 +1,5 @@
+services:
+  main:
+    volumes:
+      - ../../../data/tweet-sentiment-extraction/prepared/public:/home/data:ro
+      - ../../../data/tweet-sentiment-extraction/prepared/private:/private/data:ro

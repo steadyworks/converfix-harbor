@@ -1,0 +1,5 @@
+services:
+  main:
+    volumes:
+      - ../../../data/simple-classification-problem/prepared/public:/home/data:ro
+      - ../../../data/simple-classification-problem/prepared/private:/private/data:ro

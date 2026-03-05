@@ -1,0 +1,11 @@
+id: tomato-diseases
+name: Tomato diseases
+problem_type: community
+description: converfix/problems/tomato-diseases/description.md
+
+grader:
+  name: accuracy
+  metric_lower_is_better: false
+  grade_fn: converfix.problems.tomato-diseases.grade:grade
+
+preparer: converfix.problems.tomato-diseases.prepare:prepare

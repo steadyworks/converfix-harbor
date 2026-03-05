@@ -1,0 +1,1 @@
+training runs to completion but the submission accuracy is extremely poor. the model seems to classify almost everything incorrectly

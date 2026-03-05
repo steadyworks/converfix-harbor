@@ -1,0 +1,11 @@
+id: social-network-user-engagement-prediction
+name: Social Network User Engagement Prediction
+problem_type: community
+description: converfix/problems/social-network-user-engagement-prediction/description.md
+
+grader:
+  name: rmse
+  metric_lower_is_better: true
+  grade_fn: converfix.problems.social-network-user-engagement-prediction.grade:grade
+
+preparer: converfix.problems.social-network-user-engagement-prediction.prepare:prepare

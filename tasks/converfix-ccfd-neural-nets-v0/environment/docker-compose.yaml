@@ -1,0 +1,5 @@
+services:
+  main:
+    volumes:
+      - ../../../data/creditcard-fraud-detection-2023/prepared/public:/home/data:ro
+      - ../../../data/creditcard-fraud-detection-2023/prepared/private:/private/data:ro

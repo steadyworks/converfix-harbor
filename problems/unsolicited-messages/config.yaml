@@ -1,0 +1,11 @@
+id: unsolicited-messages
+name: Unsolicited Messages
+problem_type: community
+description: converfix/problems/unsolicited-messages/description.md
+
+grader:
+  name: accuracy
+  metric_lower_is_better: false
+  grade_fn: converfix.problems.unsolicited-messages.grade:grade
+
+preparer: converfix.problems.unsolicited-messages.prepare:prepare

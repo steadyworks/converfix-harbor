@@ -1,0 +1,11 @@
+id: simple-classification-problem
+name: Simple Classification Problem
+problem_type: community
+description: converfix/problems/simple-classification-problem/description.md
+
+grader:
+  name: accuracy
+  metric_lower_is_better: false
+  grade_fn: converfix.problems.simple-classification-problem.grade:grade
+
+preparer: converfix.problems.simple-classification-problem.prepare:prepare

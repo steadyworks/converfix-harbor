@@ -1,0 +1,1 @@
+The ensemble spam classifier trains all 11 sub-models and produces a submission file without any errors, but the overall classification accuracy is noticeably worse than expected. Spam messages frequently get misclassified as ham, and the model seems unable to pick up on distinguishing patterns that should be straightforward for an ensemble of this size.

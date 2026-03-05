@@ -1,0 +1,1 @@
+The Naive Bayes spam filter runs end-to-end and writes out a submission CSV, but the predictions are almost entirely wrong. It looks like the model confidently outputs labels, yet the accuracy is far below what even a simple baseline should achieve on this dataset.

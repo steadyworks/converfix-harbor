@@ -1,0 +1,7 @@
+zip: 69f272cd7f488187a069630a3f0c4de4
+public:
+  train.csv: 5e1d97671f9b227032f2799555e47e18
+  test.csv: ffb8c7f102809ea8b09a008b65d48170
+  sample_submission.csv: 471b663570deedc6d3da282c3573a93c
+private:
+  test.csv: 9c9fa7789b0cff277232558cac5653b3

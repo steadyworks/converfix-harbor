@@ -1,0 +1,1 @@
+it's a tf neural network for credit card fraud detection. The model trains well on my local split but I'm not sure why my predictions on the test set are not great. Can you check if there are any issues? it cannot converge all the way

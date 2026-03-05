@@ -1,0 +1,3 @@
+Hey guys, really struggling here. I'm training a MobileNetV2 on the tomato leaf disease dataset and the model just refuses to learn anything meaningful. The loss goes down super slowly and the validation accuracy is basically random - like barely above chance. I've been at this for hours and I'm losing my mind.
+
+The script runs fine, no errors or crashes, but after 3 epochs my val accuracy is still terrible. I've seen other people getting decent results with the same architecture and dataset but mine just sits there doing nothing useful. Is MobileNetV2 just bad for this task or am I missing something obvious? Any help appreciated.

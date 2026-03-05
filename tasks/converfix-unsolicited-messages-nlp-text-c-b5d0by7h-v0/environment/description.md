@@ -1,0 +1,1 @@
+The model trains but doesn't converge well -- the loss stays high or fluctuates erratically. 

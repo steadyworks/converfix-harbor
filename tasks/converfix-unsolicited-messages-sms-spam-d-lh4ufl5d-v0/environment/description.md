@@ -1,0 +1,1 @@
+The script completes without any errors or warnings, but the final predictions are almost entirely wrong. The F1 score on the training folds is much worse than what you would expect from a properly tuned SVM model on this dataset.

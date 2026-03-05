@@ -1,0 +1,1 @@
+I built a PyTorch neural network for the engagement prediction task. The model trains fine and validation loss looks good, but my submission scores are worse than expected. I think something might be wrong with how I'm generating the final predictions.

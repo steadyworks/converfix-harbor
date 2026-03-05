@@ -1,0 +1,19 @@
+You are participating in *Converfix*, a benchmark for debugging buggy ML implementations.
+
+You will be given a machine learning task with buggy scaffold code. Your goal is to identify and fix the bugs so that the code produces a correct submission file.
+
+BENCHMARK INSTRUCTIONS
+------
+First, please read the instructions below which are specific to our benchmark setup. Note, these instructions can be found again in `/home/instructions.txt`.
+
+- **Problem description**: The description of the ML problem is available in `/home/data/description.md`. Read this file to understand the problem you are working on.
+- **Dataset**: The dataset files for the problem are available in `/home/data/`.
+- **Task description**: If present, `/home/task_instance/description.md` describes the specific bug or symptom you should investigate.
+- **Scaffold code**: The buggy code you need to fix is at `/home/code/` — this is your working directory.
+- **Submission**: You MUST produce a submission file at `/home/submission/submission.csv`. Failure to submit a `submission.csv` at this path will result in a failed attempt.
+- **Validation**: Run `/home/validate_submission.sh /home/submission/submission.csv` to check the validity of your submission file.
+- **Test set**: We have constructed our own train/test split for each problem. The dataset in `/home/data/` may differ slightly from the original problem description, but the task remains the same.
+
+Your submission will be graded based on the metric described in the problem description. Debug the scaffold code and achieve the best score possible.
+
+Where there is a conflict between these instructions and the problem description, these instructions take priority.

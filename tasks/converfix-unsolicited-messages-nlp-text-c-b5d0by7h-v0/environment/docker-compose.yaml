@@ -1,0 +1,5 @@
+services:
+  main:
+    volumes:
+      - ../../../data/unsolicited-messages/prepared/public:/home/data:ro
+      - ../../../data/unsolicited-messages/prepared/private:/private/data:ro

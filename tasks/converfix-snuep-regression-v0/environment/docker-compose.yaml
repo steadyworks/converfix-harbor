@@ -1,0 +1,5 @@
+services:
+  main:
+    volumes:
+      - ../../../data/social-network-user-engagement-prediction/prepared/public:/home/data:ro
+      - ../../../data/social-network-user-engagement-prediction/prepared/private:/private/data:ro
