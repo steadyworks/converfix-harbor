@@ -1,4 +1,4 @@
-# Converfix Harbor Task Set
+# Converfix Harbor Preview Set
 
 A Harbor-compatible benchmark for debugging buggy ML implementations.
 
@@ -21,9 +21,9 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
 cd converfix-harbor
 
 # 2. Build/pull base Docker image
-sudo usermod -aG docker "$USER"                                 
+sudo usermod -aG docker "$USER"                                
 newgrp docker
-./build_or_pull_docker_image.sh # (~ 8 mins)
+./build_or_pull_docker_image.sh # (~ 5 mins)
 
 # 3. Install Python packages
 python3.12 -m venv .venv # or python3 -m venv .venv  (Needs >= Python 3.12)
@@ -36,13 +36,15 @@ git lfs install && git lfs pull
 # And go to https://www.kaggle.com/competitions/tweet-sentiment-extraction to accept the Terms
 python prepare_data.py --all
 
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------
 
 # 5. Run with Harbor
 # 5.a. Run oracle
 harbor run -c configs/job-oracle.yaml
-# Expected to see near perfect score:
+# Expected to see perfect or near perfect score:
 #⠸ 11/11 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ 0:35:44 -:--:--
-
 
 # 5.b. Run Claude Code agent
 # Option 1
