@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Bootstrap a fresh Ubuntu Lambda/cloud instance for converfix-harbor.
-# Installs: Python 3.11, Docker, NVIDIA Container Toolkit, Harbor, and prepares data.
+# Installs: Python 3.12, Docker, NVIDIA Container Toolkit, Harbor, and prepares data.
 
 # ── Clean up conflicting NVIDIA apt sources (e.g. leftover from previous run) ─
 if [ -f /etc/apt/sources.list.d/nvidia-container-toolkit.list ]; then
@@ -64,7 +64,7 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install pandas scikit-learn kaggle pyyaml
-pip install harbor-bench
+pip install harbor
 
 # ── Prepare data & build base image ──────────────────────────────────────────
 newgrp docker <<'NEWGRP'
