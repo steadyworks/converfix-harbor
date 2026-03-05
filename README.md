@@ -6,13 +6,13 @@ A Harbor-compatible benchmark for debugging buggy ML implementations.
 
 ## Prerequisites
 
-NOTE: Run `./bootstrap_prerequisite.sh`
-
-- NVIDIA Container Toolkit
-- Docker 
-- Git LFS installed
-- Python 3.12
-- Kaggle API credentials stored under: `~/.kaggle/kaggle.json`
+1. Ensure:
+   - Kaggle API credentials stored under: `~/.kaggle/kaggle.json`
+2. Ensure following are installed: Run `./bootstrap_prerequisite.sh` if not sure
+   - NVIDIA Container Toolkit
+   - Docker 
+   - Git LFS installed
+   - Python 3.12
 
 ## Quick Start
 
